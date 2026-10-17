@@ -7,7 +7,7 @@ source "$_cs_boot" 2>/dev/null || source <(curl -fsSL "${COMMUNITY_SCRIPTS_CORE_
 # Source: https://www.satisfactorygame.com/
 
 APP="Valheim"
-APPID=892970
+APPID=896660
 APP_INSTALL_DIR="/opt/valheim/server"
 STEAM_SAVE_DIR="/home/steam/.config/unity3d/IronGate/Valheim"
 
@@ -39,14 +39,15 @@ function update_script() {
   systemctl stop valheim.service
   msg_ok "Stopped $APP"
 
-  create_backup /home/steam/.config/Epic/FactoryGame/Saved
+  create_backup $STEAM_SAVE_DIR
 
   msg_info "Updating $APP"
   $STD runuser -u steam -- /opt/steamcmd/steamcmd.sh +login anonymous +quit || true
+
   if $STD runuser -u steam -- /opt/steamcmd/steamcmd.sh \
-    +force_install_dir /opt/satisfactory/server \
+    +force_install_dir /opt/valheim/server \
     +login anonymous \
-    +app_update 892970 -beta public validate \
+    +app_update 896660 validate \
     +quit; then
     msg_ok "Updated $APP"
   else
