@@ -16,7 +16,7 @@ update_os
 
 
 APP="Valheim"
-APPID=892970
+APPID=896660
 APP_INSTALL_DIR="/opt/valheim/server"
 STEAM_SAVE_DIR="/home/steam/.config/unity3d/IronGate/Valheim"
 
@@ -43,10 +43,11 @@ chown -R steam:steam /opt/steamcmd
 
 msg_info "Installing $APP Dedicated Server"
 $STD runuser -u steam -- /opt/steamcmd/steamcmd.sh +login anonymous +quit || true
+
 $STD runuser -u steam -- /opt/steamcmd/steamcmd.sh \
   +force_install_dir /opt/valheim/server \
   +login anonymous \
-  +app_update 892970 -beta public validate \
+  +app_update 896660 validate \
   +quit
 msg_ok "Installed $APP Dedicated Server"
 
