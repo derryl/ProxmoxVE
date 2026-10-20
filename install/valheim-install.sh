@@ -51,6 +51,10 @@ $STD runuser -u steam -- /opt/steamcmd/steamcmd.sh \
   +quit
 msg_ok "Installed $APP Dedicated Server"
 
+cp /opt/valheim/server/start_server.sh /opt/valheim/server/start_valheim_custom_server.sh
+chmod +x /opt/valheim/server/start_valheim_custom_server.sh
+chown steam:steam /opt/valheim/server/start_valheim_custom_server.sh
+
 msg_info "Creating Service"
 cat <<EOF >/etc/systemd/system/valheim.service
 [Unit]
@@ -65,7 +69,7 @@ Group=steam
 WorkingDirectory=/opt/valheim/server
 Environment=LANG=C.UTF-8
 Environment=HOME=/home/steam
-ExecStart=/opt/valheim/server/start_server.sh -log
+ExecStart=/opt/valheim/server/start_valheim_custom_server.sh -log
 Restart=on-failure
 RestartSec=10
 KillSignal=SIGINT
